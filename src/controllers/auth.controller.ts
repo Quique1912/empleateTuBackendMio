@@ -6,7 +6,7 @@ export class AuthController{
         try{
             const userData = req.body
             console.log(userData)
-            const newUser = AuthService.register(userData)
+            const newUser = await AuthService.register(userData)
             res.status(201).json({message:'User register succesfully', newUser})
         }catch(error){
             res.status(409).json({message: 'Fallo al registrar el usuario'})
