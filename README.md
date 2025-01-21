@@ -7,6 +7,8 @@ npm i -D @types/express
 npm i -D @swc/core @swc/cli
 
 npm i prisma @prisma/client
+#Recomendable instalar la extension prisma
 
-npm 
+npm i bcrypt
+npm i -D @types/bcrypt
 ```
