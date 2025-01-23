@@ -1,8 +1,14 @@
 import { PrismaClient, User } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
+// alta cohesion bajo acoplamiento
+
 const prisma = new PrismaClient()
 const TOKEN_PASSWORD=process.env.TOKEN_PASSWORD || 'pass'
+
+// usar patron singleton
+
 export class AuthService{
     static async register(user:User){
         //ver si el usuario no existe
