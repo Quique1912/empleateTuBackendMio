@@ -18,6 +18,12 @@ export class AuthController{
             const userData = req.body
             console.log(userData)
             const token = await AuthService.login(userData.email, userData.password)
+            res.cookie('token', token,{
+                maxAge: 60*60*1000, // 1 hora de caducidad
+                httpOnly: true, // no se puede acceder mediante javascript
+                secure: false, //solo se envia si usas https
+                sameSite: 'strict' // Evita ataques CSRF
+            })
             res.status(201).json({message:'User login succesfully', token})
         }catch(error){
             res.status(409).json({message: 'Fallo al logear el usuario'+error})

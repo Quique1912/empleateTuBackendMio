@@ -40,14 +40,8 @@ export class AuthService{
 
     static async login(email: string, password: string){
         // ve si el usuario existe
-        const findUser = await prisma.user.findUnique(
-            {
-                where:{
-                    email: email
-                    
-                }
-            }
-        )
+
+        const findUser = await prisma.user.findUnique({where:{email: email}})
         if(!findUser)throw new Error('Invalid user or password')
         
         
