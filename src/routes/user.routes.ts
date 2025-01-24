@@ -10,4 +10,8 @@ router.get('/profile', isAuthenticate, UserController.profile)
 // A este endpoint solo puede acceder el usuario role-admin
 // Crea rutas, servicios, controllers, middlewares
 
+
+// /api/users/ si el usuario usa esta ruta lista todos los usuarios
+router.get('/', isAuthenticate, UserController.getAll)
+
 export default router
