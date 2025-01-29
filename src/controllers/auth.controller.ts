@@ -1,19 +1,19 @@
 import { AuthService } from "@/sevices/auth.service";
 import { UserService } from "@/sevices/user.service";
-import express, {Response, Request} from 'express'
+import express, {Response, Request, NextFunction} from 'express'
 
 export class AuthController{
-    static async register(req:Request, res:Response){
+    static async register(req:Request, res:Response, next:NextFunction){
         try{
             const userData = req.body
             console.log(userData)
             const newUser = await AuthService.register(userData)
             res.status(201).json({message:'User register succesfully', newUser})
         }catch(error){
-            res.status(409).json({message: 'Fallo al registrar el usuario'+error})
+            next(error)
         }
     }
-    static async login(req:Request, res:Response){
+    static async login(req:Request, res:Response, next:NextFunction){
         try{
             const userData = req.body
             console.log(userData)
@@ -26,7 +26,7 @@ export class AuthController{
             })
             res.status(201).json({message:'User login succesfully', token})
         }catch(error){
-            res.status(409).json({message: 'Fallo al logear el usuario'+error})
+            next(error)
         }
     }
 }
