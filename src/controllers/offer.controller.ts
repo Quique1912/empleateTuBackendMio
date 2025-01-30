@@ -1,17 +1,44 @@
-import { UserService } from "@/sevices/user.service";
+import { OfferService } from "../sevices/offer.service";
 import express, {Response, Request, NextFunction} from 'express'
 
 export class OfferController{
-    static async getAll(req:Request, res:Response, next:NextFunction){
+    static async getById(req:Request, res:Response, next:NextFunction){
         try{
-            const user = await UserService.getAll()
-            res.status(200).json(user)
+            const id = req.params.id
+            const offer = await OfferService.getById(id)
+            res.status(200).json(offer)
         }catch(error){
             next(error)
         }
 }
 
-static async save(req: Request, res: Response, next: NextFunction){
+static async getAll(req:Request, res:Response, next:NextFunction){
+    try{
+        const id = req.params.id
+        const offer = await OfferService.getById(id)
+        res.status(200).json(offer)
+    }catch(error){
+        next(error)
+    }
+}
+
+static async create(req: Request, res: Response, next: NextFunction){
+    
+}
+
+static async delete(req: Request, res:Response, next: NextFunction){
+
+}
+
+static async update(req: Request, res:Response, next: NextFunction){
+    
+}
+
+static async rate(req: Request, res:Response, next: NextFunction){
+    
+}
+
+static async getRate(req: Request, res:Response, next: NextFunction){
     
 }
 }

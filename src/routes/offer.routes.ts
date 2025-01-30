@@ -1,12 +1,13 @@
-import { OfferController } from "@/controllers/offer.controller";
+import { OfferController } from "../controllers/offer.controller";
 import { Router } from "express";
 
 const router = Router()
 
 //Get Listar todas las ofertas localhost:3000/api/offerts/?tittle=react&category=dam
 router.get('/', OfferController.getAll)
+router.get('/:id', OfferController.getById)
 // POST añadir una oferta nueva localhost:3000/api/offerts/ {body}
-router.post('/', OfferController.save)
+router.post('/', OfferController.create)
 //Delete Borrar una oferta localhost:3000/api/offerts/xxxx
 router.post('/:id', OfferController.delete)
 //PUT modificar una oferta localhost:3000/api/offerts/xxxx {body}

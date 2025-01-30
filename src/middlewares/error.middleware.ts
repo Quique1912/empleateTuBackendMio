@@ -1,4 +1,4 @@
-import { HTTPException } from "@/exceptions/httpException";
+import { HTTPException } from "../exceptions/httpException";
 import express, {Response, Request} from 'express'
 import { NextFunction } from "express";
 

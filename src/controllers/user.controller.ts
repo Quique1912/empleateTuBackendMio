@@ -1,4 +1,4 @@
-import { UserService } from "@/sevices/user.service";
+import { UserService } from "../sevices/user.service";
 import express, {Response, Request, NextFunction} from 'express'
 
 export class UserController{
