@@ -23,7 +23,7 @@ export class OfferService{
         return users
     }
 
-    static async create(id: number, title: String, active: boolean, location: String, published: Date, expired: Date ) { 
+    static async create() { 
 
 
     }
