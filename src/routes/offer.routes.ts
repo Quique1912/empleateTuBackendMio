@@ -1,3 +1,4 @@
+import { isAdmin } from "@/middlewares/isAdmin.middleware";
 import { OfferController } from "../controllers/offer.controller";
 import { Router } from "express";
 
@@ -9,7 +10,7 @@ router.get('/:id', OfferController.getById)
 // POST añadir una oferta nueva localhost:3000/api/offerts/ {body}
 router.post('/', OfferController.create)
 //Delete Borrar una oferta localhost:3000/api/offerts/xxxx
-router.post('/:id', OfferController.delete)
+router.post('/:id', isAdmin, OfferController.delete)
 //PUT modificar una oferta localhost:3000/api/offerts/xxxx {body}
 router.put('/:id', OfferController.update)
 

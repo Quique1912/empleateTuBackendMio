@@ -1,46 +1,66 @@
 import { HTTPException } from "../exceptions/httpException";
-import { PrismaClient, User } from "@prisma/client";
+import { Offer, PrismaClient, User } from "@prisma/client";
 
 const prisma = new PrismaClient()
 
 export class OfferService{
-    static async getByEmail(email:string){
-        const findUser = await prisma.user.findUnique({where: {email}, omit:{password:true}})
-        if(!findUser) throw new HTTPException(404,'User not found')
-            return findUser
-    }
 
     static async getById(id:number){
-        const findUser = await prisma.user.findUnique({where: {id}})
-        if(!findUser) throw new HTTPException(404,'User not found')
-            return findUser
+        const findOffer = await prisma.offer.findUnique({where: {id}})
+        if(!findOffer) throw new HTTPException(404,'User not found')
+            return findOffer
     }
-
-    static async getAll(){
-        const users = await prisma.user.findMany({
-            omit: {password:true}
+// localhost:3000/api/offer/?
+    static async getAll(title: string= ''){
+        const findOffers = await prisma.offer.findMany({
+            where: title ? {
+                title:{
+                    contains: title
+                }
+            } : {},
+            orderBy:{
+                createdAt: 'desc'
+            },
+            take: 100
         })
-        return users
+        return findOffers
     }
 
-    static async create() { 
+    static async create(offer : Offer, userId: number) { 
+        const createOffers = await prisma.offer.create({
+            data: {
+            ...offer,
+            idUserCreator: userId
+            }
+        })
+        
+        return createOffers
+    }
 
+    static async delete(id: number) { 
+        return await prisma.offer.delete({
+            where: {id}
+        })
+        
 
     }
 
-    static async delete() { 
+    static async update(id: number, offer: Offer) { 
+        return await prisma.offer.update({
+            where: {id},
+            data: {
+                ...offer,
+            }
+        })
 
         
 
     }
 
-    static async update() { 
+    static async rate(id: number, userId: number,  rate: number) { 
+        return await prisma.offer.rate({
 
-        
-
-    }
-
-    static async rate() { 
+        })
 
         
 
