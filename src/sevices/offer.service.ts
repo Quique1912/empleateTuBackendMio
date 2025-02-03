@@ -58,9 +58,6 @@ export class OfferService{
     }
 
     static async rate(id: number, userId: number,  rate: number) { 
-        return await prisma.offer.rate({
-
-        })
 
         
 
