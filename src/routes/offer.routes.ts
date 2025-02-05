@@ -1,4 +1,4 @@
-import { isAdmin } from "@/middlewares/isAdmin.middleware";
+import { isAdmin } from "../middlewares/isAdmin.middleware";
 import { OfferController } from "../controllers/offer.controller";
 import { Router } from "express";
 
