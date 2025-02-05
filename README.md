@@ -36,6 +36,9 @@ npm i express-validator
 npm i -g npm-check-updates
 npx npm-check-updates
 npx npm-check-updates -u
+
+npm i morgan
+npm i --save-dev @types/morgan
 ```
 
 Ejercicio 1: Crea el endpoint que liste todos los usuarios de la web A este endpoint solo puede acceder el usuario role=admin Crea routas, servicios, controllers, middleware

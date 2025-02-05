@@ -63,11 +63,37 @@ export class OfferService{
 
     }
 
-    static async getRate() { 
+    static async getRate(idOffer: number) { 
+
+        const ratingStats= await prisma.rate.aggregate({
+            where:{idOffer},
+            _avg: {value:true},
+            _count: {value: true}
+
+        })
+
+        return {
+            totalRatings: ratingStats._count.value,
+            averateRatings: ratingStats._avg.value?.toFixed(2),
+
+        }
 
         
 
     }
+
+    static async getMyRate(idUser: number, idOffer: number){
+        const findOffer = await prisma.offer.findUnique({where: {id:idOffer}})
+        if(!findOffer) throw new HTTPException(404, 'Offer do not exists')
+
+            return await prisma.rate.findUnique({
+                where:{
+                    idUser_idOffer:{idUser, idOffer}
+                }
+            })
+    }
+
+    
 
 
       
