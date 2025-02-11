@@ -1,4 +1,3 @@
-import { isAdmin } from "../middlewares/isAdmin.middleware";
 import { OfferController } from "../controllers/offer.controller";
 import { Router } from "express";
 import { isAuthenticate } from "../middlewares/auth.middleware";
