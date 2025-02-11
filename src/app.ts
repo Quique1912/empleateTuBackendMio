@@ -24,6 +24,7 @@ app.use(cookieParser())
 //cambiar la url cuando deploy
 app.use(cors({
     origin: ['http://localhost:5173', 'https://empleatetufrontendmio.onrender.com'],
+    allowedHeaders:['Content-Type', 'Authorization'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }))
