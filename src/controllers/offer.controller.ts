@@ -1,5 +1,5 @@
-import { HTTPException } from "@/exceptions/httpException";
-import { OfferService } from "@/sevices/offer.service";
+import { HTTPException } from "../exceptions/httpException";
+import { OfferService } from "../sevices/offer.service";
 import {Response, Request, NextFunction} from 'express'
 
 export class OfferController{

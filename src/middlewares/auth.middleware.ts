@@ -1,4 +1,4 @@
-import { CustomJwtPayload } from '@/utils/CustomJwtPayload'
+import { CustomJwtPayload } from '../utils/CustomJwtPayload'
 import {Response, Request, NextFunction} from 'express'
 import jwt from "jsonwebtoken"
 
