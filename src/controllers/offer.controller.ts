@@ -1,4 +1,4 @@
-import { HTTPException } from "../exceptions/httpException";
+import { HttpException } from "../exceptions/httpException";
 import { OfferService } from "../sevices/offer.service";
 import {Response, Request, NextFunction} from 'express'
 
@@ -6,7 +6,7 @@ export class OfferController{
     static async getById(req:Request, res:Response, next:NextFunction){
         try{
             const id = Number.parseInt(req.params.id)
-            if (isNaN(id)) throw new HTTPException(400, "Invalid offer ID");
+            if (isNaN(id)) throw new HttpException(400, "Invalid offer ID");
 
             // pasar a entero
             const offer = await OfferService.getById(id)
@@ -31,7 +31,7 @@ export class OfferController{
         try{
             const offerData = req.body
             const userId = req.user?.id
-            if (!userId) throw new HTTPException(400, "User creator ID is required");
+            if (!userId) throw new HttpException(400, "User creator ID is required");
 
             const newOffer = await OfferService.create(userId, offerData)
             res.status(200).json(newOffer)
@@ -43,7 +43,7 @@ export class OfferController{
         try{
             const offerData = req.body
             const id = Number.parseInt(req.params.id)
-            if (isNaN(id)) throw new HTTPException(400, "Invalid offer ID");
+            if (isNaN(id)) throw new HttpException(400, "Invalid offer ID");
 
             const updatedOffer = await OfferService.update(id, offerData)
             res.status(200).json(updatedOffer)
@@ -55,7 +55,7 @@ export class OfferController{
     static async delete(req:Request, res:Response, next: NextFunction){
         try{
             const id = Number.parseInt(req.params.id)
-            if (isNaN(id)) throw new HTTPException(400, "Invalid offer ID");
+            if (isNaN(id)) throw new HttpException(400, "Invalid offer ID");
 
             const deletedOffer = await OfferService.delete(id)
             res.status(200).json(deletedOffer)
@@ -66,11 +66,11 @@ export class OfferController{
     static async rate(req:Request, res:Response, next: NextFunction){
         try{
             const id = Number.parseInt(req.params.id)
-            if (isNaN(id)) throw new HTTPException(400, "Invalid offer ID");
+            if (isNaN(id)) throw new HttpException(400, "Invalid offer ID");
 
             const {value} = req.body
             const userId = req.user?.id
-            if(!userId) throw new HTTPException(400, "User creator ID is required");
+            if(!userId) throw new HttpException(400, "User creator ID is required");
 
             await OfferService.rate(userId, id, value)
             res.status(200).json({message: 'Offer rate successfully'})
@@ -82,7 +82,7 @@ export class OfferController{
     static async getRate(req:Request, res:Response, next: NextFunction){
         try{
             const id = Number.parseInt(req.params.id)
-            if (isNaN(id)) throw new HTTPException(400, "Invalid offer ID");
+            if (isNaN(id)) throw new HttpException(400, "Invalid offer ID");
 
             await OfferService.getRate(id)
             res.status(200).json({message: 'Offer rate successfully'})

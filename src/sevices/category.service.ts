@@ -1,5 +1,5 @@
 import { prisma } from "../database/database";
-import { HTTPException } from "../exceptions/httpException";
+import { HttpException } from "../exceptions/httpException";
 import { Category } from "@prisma/client";
 
 //TODO problema, mejor usar el patrón singleton
@@ -11,7 +11,7 @@ export class CategoryService {
 
   static async getById(id: number) {
     const findOffert = await prisma.category.findUnique({ where: { id: id } });
-    if (!findOffert) throw new HTTPException(404, "Category doesn't exist");
+    if (!findOffert) throw new HttpException(404, "Category doesn't exist");
 
     return findOffert;
   }
@@ -24,7 +24,7 @@ export class CategoryService {
         },
       });
     }catch(error){
-        throw new HTTPException(401, "Error creating category");
+        throw new HttpException(401, "Error creating category");
       }
   }
 
@@ -35,7 +35,7 @@ export class CategoryService {
         data: { ...category },
       });
     } catch (error) {
-      throw new HTTPException(404, "Category not found");
+      throw new HttpException(404, "Category not found");
     }
   }
 
@@ -43,7 +43,7 @@ export class CategoryService {
     try {
       return await prisma.category.delete({ where: { id } });
     } catch (error) {
-      throw new HTTPException(404, "Category not found");
+      throw new HttpException(404, "Category not found");
     }
   }
 }

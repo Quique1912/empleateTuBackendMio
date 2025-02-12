@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { HTTPException } from "../exceptions/httpException";
+import { HttpException } from "../exceptions/httpException";
 import { CategoryService } from "../sevices/category.service";
 
 export class CategoryController {
@@ -15,7 +15,7 @@ export class CategoryController {
     static async getById(req: Request, res: Response, next: NextFunction) {
         try {
             const id = parseInt(req.params.id);
-            if (isNaN(id)) throw new HTTPException(400, "Invalid category ID");
+            if (isNaN(id)) throw new HttpException(400, "Invalid category ID");
 
             const category = await CategoryService.getById(id);
             res.status(200).json(category)            
@@ -28,7 +28,7 @@ export class CategoryController {
         try {
             const category = req.body;
 
-            if (!category) throw new HTTPException(400, "Category is required");
+            if (!category) throw new HttpException(400, "Category is required");
 
             const newCategory = await CategoryService.create(category);
             res.status(201).json(newCategory);
@@ -40,10 +40,10 @@ export class CategoryController {
     static async update(req: Request, res: Response, next: NextFunction) {
         try {
             const id = parseInt(req.params.id);
-            if (isNaN(id)) throw new HTTPException(400, "Invalid category ID");
+            if (isNaN(id)) throw new HttpException(400, "Invalid category ID");
 
             const category = req.body;
-            if (!category) throw new HTTPException(400, "Category is required");
+            if (!category) throw new HttpException(400, "Category is required");
 
             const updatedCategory = await CategoryService.update(id, category);
             res.status(200).json(updatedCategory)
@@ -55,7 +55,7 @@ export class CategoryController {
     static async delete(req: Request, res: Response, next: NextFunction) {
         try {
             const id = parseInt(req.params.id);
-            if (isNaN(id)) throw new HTTPException(400, "Invalid category ID");
+            if (isNaN(id)) throw new HttpException(400, "Invalid category ID");
 
             const deleted = await CategoryService.delete(id);
             res.status(200).json(deleted)
