@@ -27,8 +27,8 @@ CREATE TABLE "Offer" (
     "updatedAt" DATETIME NOT NULL,
     "idCategory" INTEGER,
     "idUserCreator" INTEGER NOT NULL,
-    CONSTRAINT "Offer_idCategory_fkey" FOREIGN KEY ("idCategory") REFERENCES "Category" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT "Offer_idUserCreator_fkey" FOREIGN KEY ("idUserCreator") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Offer_idUserCreator_fkey" FOREIGN KEY ("idUserCreator") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Offer_idCategory_fkey" FOREIGN KEY ("idCategory") REFERENCES "Category" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -48,8 +48,8 @@ CREATE TABLE "Rate" (
     "updatedAt" DATETIME NOT NULL,
 
     PRIMARY KEY ("idUser", "idOffer"),
-    CONSTRAINT "Rate_idUser_fkey" FOREIGN KEY ("idUser") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Rate_idOffer_fkey" FOREIGN KEY ("idOffer") REFERENCES "Offer" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Rate_idOffer_fkey" FOREIGN KEY ("idOffer") REFERENCES "Offer" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Rate_idUser_fkey" FOREIGN KEY ("idUser") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex
