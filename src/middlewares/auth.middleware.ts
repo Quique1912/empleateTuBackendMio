@@ -1,4 +1,4 @@
-import { CustomJwtPayload } from '@/utils/CustomJwtPayload'
+import { CustomJwtPayload } from '../utils/CustomJwtPayload'
 import {Response, Request, NextFunction} from 'express'
 import jwt from "jsonwebtoken"
 
@@ -13,7 +13,6 @@ export const isAuthenticate = (req:Request, res:Response, next:NextFunction):any
     try{
         const tokenDecodificado = jwt.verify(token, TOKEN_PASSWORD)
         req.user = tokenDecodificado as CustomJwtPayload
-        console.log('usuario autenticado', req.user)
         next()
     }catch(error){
         res.status(401).json({error:'Invalid token'})
