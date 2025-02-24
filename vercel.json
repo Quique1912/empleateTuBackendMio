@@ -1,0 +1,17 @@
+{
+  "builds": [
+    {
+      "src": "dist/src/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/src/server.js"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url"
+  }
+}
