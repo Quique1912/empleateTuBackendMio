@@ -48,4 +48,16 @@ app.get('/', (req:Request, res:Response)=>{
     res.send('Bienvenido al backend (api rest)')
 })
 
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+  
+    // Simulación de autenticación correcta
+    if (email === "test@example.com" && password === "123456") {
+      res.json({ token: "ejemplo_de_token" });
+    } else {
+      res.status(401).json({ error: "Credenciales incorrectas" });
+    }
+  });
+  
+
 export default app
