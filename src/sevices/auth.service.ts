@@ -48,10 +48,10 @@ export class AuthService {
         const token = jwt.sign(
             {colorFavorito:'azul', id:findUser.id, email:findUser.email, role:findUser.role}, 
             TOKEN_PASSWORD, 
-            {expiresIn:"1h"}
+            {expiresIn:"6h"}
         )
         // devolver el token
-        return token
+        return {token}
     }
 
 }
