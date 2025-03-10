@@ -3,10 +3,17 @@ import { NextFunction,Request,Response } from "express";
 
 export const ErrorMiddleware = (error: HttpException, req:Request, res:Response, next:NextFunction) =>{
     try{
+    
+            if(res.headersSent){//se agrego esto para probar
+                return next(error);//se agregoe sto para probar
+                }//se agregoe sto para probar.
+                
+
+
         const status = error.status || 500
         const message = error.message || 'Something went wrong'
         res.status(status).json({message})
     }catch(error){
         next(error)
-    }
+    }
 }
