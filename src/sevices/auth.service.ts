@@ -7,8 +7,6 @@ import jwt from "jsonwebtoken"
 // usar un patron: singlenton
 //const prisma = new PrismaClient()
 const TOKEN_PASSWORD = process.env.TOKEN_PASSWORD || 'pass'
-const TOKEN_SECRET = process.env.TOKEN_SECRET || "defaultSecret";
-const REFRESH_SECRET = process.env.REFRESH_SECRET || "defaultRefreshSecret";
 
 export class AuthService {
     static async register(user: User) {
@@ -26,7 +24,8 @@ export class AuthService {
             data:{
                 ...user,
                 password: passwordEncrypted,
-                role: null
+                role: null,
+                //a:'aa'
             },
             omit:{
                 password:true
@@ -34,18 +33,26 @@ export class AuthService {
         })
     }
 
-    static async login(email: string, password: string) {
-        // Lógica para verificar el usuario
-        const user = await prisma.user.findUnique({ where: { email } });
-        if (!user || user.password !== password) {
-            throw new Error('Invalid credentials');
-        }
+    static async login(email:string, password:string){
+         // ver si el usuario existe
+        //const query = `SELECT id, email, role, password FROM user WHERE email='${email}'`
+        //const findUsers = await prisma.$queryRawUnsafe(query) as User[]
+        //const findUser = findUsers[0]
 
-        // Generación de los tokens
-        const accessToken = jwt.sign({ id: user.id }, TOKEN_SECRET, { expiresIn: "3h" });
-        const refreshToken = jwt.sign({ id: user.id }, REFRESH_SECRET, { expiresIn: "7d" });
+        const findUser = await prisma.user.findUnique({where:{email}})
+        if(!findUser) throw new HttpException(401, 'Invalid user or password')
+         // ver si el password coincide
+        const isPasswordCorrect = await bcrypt.compare(password, findUser.password)
+        if(!isPasswordCorrect) throw new HttpException(401,'Invalid user or password')
 
-        return { accessToken, refreshToken };
+        // generar el token de autenticación
+        const token = jwt.sign(
+            {colorFavorito:'azul', id:findUser.id, email:findUser.email, role:findUser.role}, 
+            TOKEN_PASSWORD, 
+            {expiresIn:"1h"}
+        )
+        // devolver el token y el usuario
+        return {token, user: { id: findUser.id, email: findUser.email, role: findUser.role } }
     }
-}
 
+}
