@@ -1,4 +1,4 @@
-import { AuthService } from '@/sevices/auth.service';
+import { AuthService } from '../sevices/auth.service';
 import { Response, Request, NextFunction } from 'express'
 import jwt from "jsonwebtoken";
 

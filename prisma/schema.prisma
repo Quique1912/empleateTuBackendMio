@@ -29,6 +29,8 @@ model User {
   
   offers    Offer[]
   rates     Rate[]
+
+  Advise Advise[]
 }
 
 model Offer {
@@ -76,4 +78,16 @@ model Rate{
   offer  Offer  @relation(fields: [idOffer], references: [id])
 
   @@id([idUser, idOffer])
+}
+
+model Advise {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+
+  // FK opcional para asociar la sugerencia con un usuario
+  idUser    Int?    
+  user      User? @relation(fields: [idUser], references: [id])
 }

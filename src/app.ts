@@ -3,6 +3,7 @@ import authRouter from './routes/auth.routes'
 import userRouter from './routes/user.routes'
 import offerRouter from './routes/offer.routes'
 import categoryRouter from './routes/category.routes'
+import adviseRouter from './routes/advise.routes'
 
 import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
@@ -43,6 +44,7 @@ app.use('/api/auth',authRouter)
 app.use('/api/users',userRouter)
 app.use('/api/offers', offerRouter)
 app.use('/api/categories', categoryRouter)
+app.use('api/advises', adviseRouter)
 
 app.get('/', (req:Request, res:Response)=>{
     res.send('Bienvenido al backend (api rest)')
