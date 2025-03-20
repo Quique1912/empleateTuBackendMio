@@ -27,4 +27,10 @@ export const categoryValidation = [
 export const rateValidation = [
     body('value').isInt({min:0, max:5}).toInt().withMessage('Value is required')
 ]
+
+export const suggestionValidation = [
+    body('title')
+        .isLength({min:4,max:40}).withMessage('Titulo mas de 4 caracteres'),
+    body('description').optional().isLength({max:2000})
+]
 //...

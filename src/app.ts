@@ -3,7 +3,6 @@ import authRouter from './routes/auth.routes'
 import userRouter from './routes/user.routes'
 import offerRouter from './routes/offer.routes'
 import categoryRouter from './routes/category.routes'
-import adviseRouter from './routes/advise.routes'
 
 import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
@@ -11,6 +10,7 @@ import compression from 'compression'
 import cookieParser  from 'cookie-parser'
 import cors  from 'cors'
 import morgan from 'morgan'
+import suggestionsRouter from './routes/suggestion.routes'
 
 const app = express()
 
@@ -44,7 +44,7 @@ app.use('/api/auth',authRouter)
 app.use('/api/users',userRouter)
 app.use('/api/offers', offerRouter)
 app.use('/api/categories', categoryRouter)
-app.use('api/advises', adviseRouter)
+
 
 app.get('/', (req:Request, res:Response)=>{
     res.send('Bienvenido al backend (api rest)')
@@ -60,6 +60,8 @@ app.post("/login", (req, res) => {
       res.status(401).json({ error: "Credenciales incorrectas" });
     }
   });
+  app.use('/api/suggestions',suggestionsRouter)
+
   
 
 export default app
